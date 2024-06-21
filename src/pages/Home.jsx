@@ -1,10 +1,15 @@
-import { useEffect } from "react";
 import { useNoteContext } from "../contexts/NoteContext";
-import { Container, Grid, IconButton, Typography } from "@mui/material";
+import {
+  Container,
+  Grid,
+  IconButton,
+  Typography,
+  CardContent,
+  CardHeader,
+  Card,
+} from "@mui/material";
 import { DeleteOutline } from "@mui/icons-material";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
+
 export function Home() {
   const { notes, deleteNoteHandler } = useNoteContext();
   return (

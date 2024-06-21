@@ -1,5 +1,6 @@
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { useState } from "react";
+import { useNoteContext } from "../contexts/NoteContext";
+import { v4 as uuidv4 } from "uuid";
 import { KeyboardArrowRight } from "@mui/icons-material";
 import {
   Container,
@@ -8,14 +9,12 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
+  TextField,
+  Typography,
+  Button,
 } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import { useState } from "react";
-import { useNoteContext } from "../contexts/NoteContext";
-import { v4 as uuidv4 } from "uuid";
 
 export function Create() {
-  // const note = useRef("");
   const [details, setDetails] = useState("");
   const [title, setTitle] = useState("");
   const [titleError, setTitleError] = useState(false);

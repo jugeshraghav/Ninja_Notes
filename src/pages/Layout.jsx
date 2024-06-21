@@ -4,21 +4,19 @@ import {
   Box,
   Drawer,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Toolbar,
   Typography,
 } from "@mui/material";
-// import { makeStyles } from "@mui/styles";
+
 import { useLocation, useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
 const classes = {
   page: {
-    background: "#f9f9f9",
     paddingTop: "50px",
     height: "100%",
     width: `calc(100% - ${drawerWidth}px)`,
@@ -60,12 +58,12 @@ export default function Layout({ children }) {
   const menuItems = [
     {
       text: "My Notes",
-      icon: <SubjectOutlined color="secondary" />,
+      icon: <SubjectOutlined color="primary" />,
       path: "/",
     },
     {
       text: "Create Note",
-      icon: <AddCircleOutlineOutlined color="secondary" />,
+      icon: <AddCircleOutlineOutlined color="primary" />,
       path: "/create",
     },
   ];
@@ -77,10 +75,13 @@ export default function Layout({ children }) {
         position="fixed"
         sx={classes.appBar}
         elevation={0}
-        color="primary"
+        color="secondary"
       >
-        <Toolbar variant="h6" sx={{ paddingTop: "15px" }}>
-          Welcome to Ninja Notes
+        <Toolbar>
+          <Typography variant="h6" color="primary">
+            {" "}
+            Welcome to Ninja Notes
+          </Typography>
         </Toolbar>
       </AppBar>
 
@@ -117,10 +118,7 @@ export default function Layout({ children }) {
       </Drawer>
 
       {/* main content */}
-      <Box sx={classes.page}>
-        {/* <div sx={classes.toolbar}></div> */}
-        {children}
-      </Box>
+      <Box sx={classes.page}>{children}</Box>
     </div>
   );
 }
