@@ -6,9 +6,7 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
 export function Home() {
-  const { notes } = useNoteContext();
-  console.log(notes);
-  useEffect(() => {}, []);
+  const { notes, deleteNoteHandler } = useNoteContext();
   return (
     <Container>
       <h1>My Notes</h1>
@@ -18,7 +16,7 @@ export function Home() {
             <Card elevation={2}>
               <CardHeader
                 action={
-                  <IconButton>
+                  <IconButton onClick={() => deleteNoteHandler(note)}>
                     <DeleteOutline />
                   </IconButton>
                 }

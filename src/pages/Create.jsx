@@ -24,7 +24,7 @@ export function Create() {
 
   //get context values
   const { notes, addNoteHandler } = useNoteContext();
-  console.log(notes);
+
   //custom css classes
   const classes = {
     margin: {
@@ -55,8 +55,6 @@ export function Create() {
       setDetails("");
       setCategory("todos");
     }
-
-    // note.current = "Write Something.";
   };
   return (
     <>

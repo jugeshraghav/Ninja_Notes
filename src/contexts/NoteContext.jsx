@@ -1,34 +1,33 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { todosList } from "../data/data";
 
 const NoteContext = createContext();
 
 export const NoteContextProvider = ({ children }) => {
-  const [notes, setNotes] = useState(
-    JSON.parse(localStorage.getItem("notes")) || []
-  );
+  const [notes, setNotes] = useState([]); // Initialize with empty array
 
-  //setting the todos data from ./data/data.js to localStorage
-  const todosArray = todosList;
-  const todosListStringified = JSON.stringify(todosArray);
-  localStorage.setItem("notes", todosListStringified);
+  // Load existing notes from localStorage on component mount
+  useEffect(() => {
+    const notesString = localStorage.getItem("notes");
+    if (notesString) {
+      setNotes(JSON.parse(notesString));
+    }
+  }, []);
 
-  //handlers
+  // Add note handler (unchanged from previous solution)
   const addNoteHandler = (myNote) => {
-    //get notes string from local storage
-    let notesString = localStorage.getItem("notes");
-    let parsedNotesArray = JSON.parse(notesString) || [];
-    //add the new notes to the existing array
-    parsedNotesArray = [...parsedNotesArray, myNote];
-    //add the updated notes array to the local storage but stringify it first
-    let updatedNotesString = JSON.stringify(parsedNotesArray);
+    setNotes([...notes, myNote]);
+    const updatedNotesString = JSON.stringify([...notes, myNote]);
     localStorage.setItem("notes", updatedNotesString);
-
-    //update the notes state
-    setNotes([...notes, parsedNotesArray]);
   };
+
+  // Delete note handler (updated with localStorage deletion)
   const deleteNoteHandler = (myNote) => {
-    setNotes(notes.filter(({ id }) => id != myNote.id));
+    const filteredNotes = notes.filter(({ id }) => id !== myNote.id);
+    setNotes(filteredNotes); // Update state first
+
+    const updatedNotesString = JSON.stringify(filteredNotes);
+    localStorage.setItem("notes", updatedNotesString); // Then update localStorage
   };
   return (
     <NoteContext.Provider value={{ notes, addNoteHandler, deleteNoteHandler }}>
